@@ -4,6 +4,8 @@
 import os
 import tempfile
 
+import pytest
+
 from anki.collection import CardStats
 from tests.shared import getEmptyCol
 
@@ -37,3 +39,22 @@ def test_graphs():
     with open(os.path.join(dir, "test.html"), "w", encoding="UTF-8") as note:
         note.write(rep)
     return
+
+
+def test_topic_mastery_calls_rust_backend():
+    col = getEmptyCol()
+    note = col.newNote()
+    note["Front"] = "mitochondrion"
+    note.add_tag("mcat::biology")
+    col.addNote(note)
+
+    output = col.topic_mastery("mcat")
+
+    assert output.tag_prefix == "mcat"
+    assert output.mastery_threshold == pytest.approx(0.9)
+    assert output.total_tagged_cards == 1
+    assert output.cards_with_memory_state == 0
+    assert output.cards_without_memory_state == 1
+    assert len(output.topics) == 1
+    assert output.topics[0].topic == "mcat::biology"
+    assert output.topics[0].mastery == 0

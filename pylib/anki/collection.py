@@ -1042,6 +1042,14 @@ class Collection(DeprecatedNamesMixin):
     ) -> Sequence[stats_pb2.CardStatsResponse.StatsRevlogEntry]:
         return self._backend.get_review_logs(card_id)
 
+    def topic_mastery(
+        self, tag_prefix: str, mastery_threshold: float = 0.9
+    ) -> stats_pb2.TopicMasteryResponse:
+        """Return read-only FSRS recall and mastery grouped by descendant tags."""
+        return self._backend.topic_mastery(
+            tag_prefix=tag_prefix, mastery_threshold=mastery_threshold
+        )
+
     def studied_today(self) -> str:
         return self._backend.studied_today()
 

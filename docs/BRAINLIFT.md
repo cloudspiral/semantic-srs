@@ -1,8 +1,8 @@
 # Speedrun Brainlift v1
 
-Status: v1, written before the Anki source was added to this workspace  
-Exam: MCAT  
-Spike: Why MCAT students can maintain strong flashcard recall while remaining unable to transfer that knowledge to unfamiliar passages  
+Status: v1, written before the Anki source was added to this workspace\
+Exam: MCAT\
+Spike: Why MCAT students can maintain strong flashcard recall while remaining unable to transfer that knowledge to unfamiliar passages\
 Research cutoff: 2026-07-30
 
 ## 1. Purpose and boundaries
@@ -40,7 +40,7 @@ Even above that floor, readiness requires held-back exam-style responses. Card r
 
 These are the load-bearing sources, not an exhaustive bibliography.
 
-### S1. Wozniak, *Optimization of Learning* and the SM-2 lineage
+### S1. Wozniak, _Optimization of Learning_ and the SM-2 lineage
 
 - Primary/source-of-record: https://www.super-memory.com/english/ol/sm2.htm
 - System lineage: https://www.super-memory.com/english/ol.htm
@@ -48,7 +48,7 @@ These are the load-bearing sources, not an exhaustive bibliography.
 - What this project takes: review history is event data, scheduling state belongs in the shared engine, and a scheduler should be inspectable.
 - What it rejects: a scheduling heuristic is not evidence of far transfer or exam readiness.
 
-### S2. Ye, Su, and Cao (2022), *A Stochastic Shortest Path Algorithm for Optimizing Spaced Repetition Scheduling*
+### S2. Ye, Su, and Cao (2022), _A Stochastic Shortest Path Algorithm for Optimizing Spaced Repetition Scheduling_
 
 - DOI: https://doi.org/10.1145/3534678.3539081
 - Reproduction repository: https://github.com/maimemo/SSP-MMC
@@ -67,7 +67,7 @@ These are the load-bearing sources, not an exhaustive bibliography.
 - What this project takes: preserve FSRS intervals and undo semantics; expose mastery through Anki's protobuf/Rust/Python boundary so desktop and phone use one definition.
 - What it rejects: desired retention is not a readiness percentage, and a JavaScript or Swift reimplementation would create a second engine.
 
-### S4. Roediger and Karpicke (2006), *Test-Enhanced Learning*
+### S4. Roediger and Karpicke (2006), _Test-Enhanced Learning_
 
 - DOI: https://doi.org/10.1111/j.1467-9280.2006.01693.x
 - Primary article copy: https://is.muni.cz/el/phil/jaro2013/PSB_443/um/39045645/3_5.3._Test_enhanced_learning.pdf
@@ -75,14 +75,14 @@ These are the load-bearing sources, not an exhaustive bibliography.
 - What this project takes: performance during study and durable learning can point in different directions; delayed, held-back outcomes matter.
 - What it rejects: the result does not show that recalling the original wording transfers to a novel MCAT passage.
 
-### S5. Kornell and Bjork (2008), *Learning Concepts and Categories: Is Spacing the Enemy of Induction?*
+### S5. Kornell and Bjork (2008), _Learning Concepts and Categories: Is Spacing the Enemy of Induction?_
 
 - DOI/record: https://pubmed.ncbi.nlm.nih.gov/18578849/
 - Evidence used: interleaving category exemplars improved later classification even though learners commonly preferred blocking.
 - What this project takes: discriminating among confusable topics may require mixed examples and novel classification, not another same-form retrieval.
 - What it rejects: a category-learning result is not permission to interleave every learner and topic from the first exposure.
 
-### S6. Sweller (1988), *Cognitive Load During Problem Solving: Effects on Learning*
+### S6. Sweller (1988), _Cognitive Load During Problem Solving: Effects on Learning_
 
 - DOI: https://doi.org/10.1207/s15516709cog1202_4
 - Evidence used: conventional means-ends problem solving can consume capacity needed for schema acquisition, and prior knowledge changes what instruction is useful.
@@ -159,11 +159,11 @@ FSRS can personalize memory from an individual's review log. MCAT score mapping 
 
 ### What the public teardown exposed
 
-| Tool | DOK actually measured in public workflow | Progress number publicly documented | What it implies | Unknown / hands-on check required |
-| --- | --- | --- | --- | --- |
-| AAMC Official Prep | DOK 2/3 through official-style questions and full lengths | Correctness and official scaled practice score | Closest evidence of present exam performance | Whether the hub exposes explicit abstention, calibration history, or a single next-study recommendation |
-| Blueprint | DOK 2/3 through diagnostic, QBank, section and full-length exams | Scores over time, accuracy, timing, answer changes, topic/reasoning metadata | Analytics and targeting are described as indicating what raises score | Exact score uncertainty UI, cold-start behavior, question rewording, and whether recommendations expose missing data |
-| UWorld | DOK 1 flashcards plus DOK 2/3 QBank/full lengths | Flashcard performance, QBank analytics, topic gaps, full-length results | Vendor explicitly says QBank is diagnostic and full lengths predict scores better | Whether memory and question performance are joined at the same concept level, and whether score prediction shows a calibrated range |
+| Tool               | DOK actually measured in public workflow                         | Progress number publicly documented                                          | What it implies                                                                   | Unknown / hands-on check required                                                                                                   |
+| ------------------ | ---------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| AAMC Official Prep | DOK 2/3 through official-style questions and full lengths        | Correctness and official scaled practice score                               | Closest evidence of present exam performance                                      | Whether the hub exposes explicit abstention, calibration history, or a single next-study recommendation                             |
+| Blueprint          | DOK 2/3 through diagnostic, QBank, section and full-length exams | Scores over time, accuracy, timing, answer changes, topic/reasoning metadata | Analytics and targeting are described as indicating what raises score             | Exact score uncertainty UI, cold-start behavior, question rewording, and whether recommendations expose missing data                |
+| UWorld             | DOK 1 flashcards plus DOK 2/3 QBank/full lengths                 | Flashcard performance, QBank analytics, topic gaps, full-length results      | Vendor explicitly says QBank is diagnostic and full lengths predict scores better | Whether memory and question performance are joined at the same concept level, and whether score prediction shows a calibrated range |
 
 Teardown limitation: no paid or authenticated session was available during v1. The table records public interfaces, documentation, and product claims only. Before submission, run a scripted hands-on session in each tool and replace unknowns with screenshots and timestamps. Do not convert marketing claims into observed behavior.
 
@@ -173,7 +173,7 @@ Teardown limitation: no paid or authenticated session was available during v1. T
 
 **Consensus says:** once recall is high, the learner should keep the spaced-repetition queue moving and add general question-bank volume.
 
-**I think:** for MCAT learners with credible topic recall, the binding constraint is often *discriminative transfer*, and the next activity should be chosen by the largest exam-weighted gap between recall and held-back reworded-question performance. More cards from the same cue are often negative-value work at that point.
+**I think:** for MCAT learners with credible topic recall, the binding constraint is often _discriminative transfer_, and the next activity should be chosen by the largest exam-weighted gap between recall and held-back reworded-question performance. More cards from the same cue are often negative-value work at that point.
 
 **Evidence:** retrieval and interleaving research separates practice fluency from delayed classification; MCAT passages require selecting knowledge under a changed cue; current tools publicly report memory or question performance, but the transparent gap is not their primary object.
 
@@ -201,8 +201,8 @@ Teardown limitation: no paid or authenticated session was available during v1. T
 
 ## 7. AI consensus check
 
-Model: OpenAI Codex, GPT-5 family  
-Date: 2026-07-30  
+Model: OpenAI Codex, GPT-5 family\
+Date: 2026-07-30\
 Rule: the model was asked for objections, not approval. The evidence pass supplied sources without debating the response.
 
 ### Pass one - POV cold
@@ -239,13 +239,13 @@ Cold result: useful pushback. The original claim was too broad about "MCAT learn
 
 **Response**
 
-The sources move the claim from an unsupported replacement of spaced repetition to a plausible, falsifiable *routing policy after a memory prerequisite is met*. Kornell and Bjork support testing discrimination under varied exemplars; Roediger and Karpicke support using delayed outcomes rather than practice fluency; Sweller justifies the prerequisite gate; FSRS provides a separable memory estimate.
+The sources move the claim from an unsupported replacement of spaced repetition to a plausible, falsifiable _routing policy after a memory prerequisite is met_. Kornell and Bjork support testing discrimination under varied exemplars; Roediger and Karpicke support using delayed outcomes rather than practice fluency; Sweller justifies the prerequisite gate; FSRS provides a separable memory estimate.
 
 They do not establish that an exam-weighted transfer gap is the optimal policy, that the gap will be stable per learner, or that it maps to MCAT score gain. The defensible claim is:
 
 > Among learners/topics that pass a predeclared recall-evidence gate, routing a fixed study-time budget toward official-topic-weighted, held-back transfer weaknesses may improve novel passage accuracy without harming calibrated recall; a three-arm test can reject that claim.
 
-What moved: the objection that the idea necessarily competes with or corrupts the memory scheduler.  
+What moved: the objection that the idea necessarily competes with or corrupts the memory scheduler.\
 What survived: causal identification, measurement leakage, stability, topic-weight validity, sample-size, and score-mapping objections.
 
 ### Load-bearing update
@@ -261,11 +261,11 @@ The AI check narrowed POV 1. The build will:
 
 ## 8. Traceability table
 
-| POV | Forced build | Real code target | Predeclared number | Failure condition |
-| --- | --- | --- | --- | --- |
-| Transfer, not more same-cue review | Per-topic mastery query plus transfer-gap queue; thesis feature flag for ablation | Anki Rust collection service, new protobuf request/response, generated Python binding, desktop next-action service | Held-back passage accuracy difference with 95% interval; memory Brier score must not worsen beyond 0.02 | Feature-on does not beat feature-off and unmodified Anki under equal time, or harms recall calibration beyond limit |
-| Readiness may disappear | Three separate score cards with ranges, coverage, reasons, timestamps, sample counts, and enforced give-up rule | Shared scoring module and desktop/phone view state | Abstain below 200 reviews or 50% official-topic coverage; readiness additionally requires at least 50 held-back questions across all four sections | Any UI path emits a projected score below the floor, or hides missing-section coverage |
-| Priority must not rewrite memory | Read-only mastery RPC and query-time ordering; unchanged FSRS scheduling/undo | Rust query code and tests proving collection remains unchanged | Query p95 under 100 ms on 50,000 cards; collection checksum unchanged; undo behavior unchanged | Query mutates collection/scheduling state, misses the latency target, or desktop and phone disagree |
+| POV                                | Forced build                                                                                                    | Real code target                                                                                                   | Predeclared number                                                                                                                                 | Failure condition                                                                                                   |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Transfer, not more same-cue review | Per-topic mastery query plus transfer-gap queue; thesis feature flag for ablation                               | Anki Rust collection service, new protobuf request/response, generated Python binding, desktop next-action service | Held-back passage accuracy difference with 95% interval; memory Brier score must not worsen beyond 0.02                                            | Feature-on does not beat feature-off and unmodified Anki under equal time, or harms recall calibration beyond limit |
+| Readiness may disappear            | Three separate score cards with ranges, coverage, reasons, timestamps, sample counts, and enforced give-up rule | Shared scoring module and desktop/phone view state                                                                 | Abstain below 200 reviews or 50% official-topic coverage; readiness additionally requires at least 50 held-back questions across all four sections | Any UI path emits a projected score below the floor, or hides missing-section coverage                              |
+| Priority must not rewrite memory   | Read-only mastery RPC and query-time ordering; unchanged FSRS scheduling/undo                                   | Rust query code and tests proving collection remains unchanged                                                     | Query p95 under 100 ms on 50,000 cards; collection checksum unchanged; undo behavior unchanged                                                     | Query mutates collection/scheduling state, misses the latency target, or desktop and phone disagree                 |
 
 Features with no row are scope creep.
 
@@ -312,3 +312,9 @@ Before this Brainlift can be called submission-complete:
 5. Run the three-arm thesis test and update every POV with what survived.
 
 This v1 is sufficient to constrain implementation. It is not evidence that the thesis works.
+
+## 11. First build contact - 2026-07-30
+
+POV 3 survived the first implementation pass: the useful exam-specific primitive was expressible as a read-only query, with no FSRS scheduling or undo implementation changes. Three Rust tests and a Python bridge test pass. The 50,000-card query initially missed the predeclared 100 ms target when it used Anki's general search table plus a second note-tag fetch. Replacing that path with one cached, minimal SQLite join reduced the optimized 20-run result to 19.752 ms p50, 20.215 ms p95, and 20.860 ms worst case.
+
+This is systems evidence only. POV 1 has not survived or failed yet because no held-back transfer experiment has run. POV 2 remains a product constraint: readiness stays absent until the predeclared evidence floor and a defensible score mapping exist.
