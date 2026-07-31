@@ -26,6 +26,13 @@ impl crate::services::StatsService for Collection {
         self.graph_data_for_search(&input.search, input.days)
     }
 
+    fn topic_mastery(
+        &mut self,
+        input: anki_proto::stats::TopicMasteryRequest,
+    ) -> error::Result<anki_proto::stats::TopicMasteryResponse> {
+        self.topic_mastery(input)
+    }
+
     fn get_graph_preferences(&mut self) -> error::Result<anki_proto::stats::GraphPreferences> {
         Ok(Collection::get_graph_preferences(self))
     }
