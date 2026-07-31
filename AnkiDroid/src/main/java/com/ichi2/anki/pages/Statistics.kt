@@ -18,11 +18,14 @@ import com.ichi2.anki.databinding.PageStatisticsBinding
 import com.ichi2.anki.dialogs.registerDeckSelectedHandler
 import com.ichi2.anki.dialogs.startDeckSelection
 import com.ichi2.anki.launchCatchingTask
+import com.ichi2.anki.libanki.stats.topicMastery
 import com.ichi2.anki.model.SelectableDeck
 import com.ichi2.anki.snackbar.showSnackbar
 import com.ichi2.anki.withProgress
 import dev.androidbroadcast.vbpd.viewBinding
 import timber.log.Timber
+import java.text.DateFormat
+import java.util.Date
 
 class Statistics : PageFragment(R.layout.page_statistics) {
     override val pagePath: String = "graphs"
@@ -65,6 +68,64 @@ class Statistics : PageFragment(R.layout.page_statistics) {
                 changeDeck(deckName)
             }
         }
+        loadSpeedrunDashboard()
+    }
+
+    private fun loadSpeedrunDashboard() {
+        requireActivity().launchCatchingTask {
+            try {
+                val state =
+                    withCol {
+                        SpeedrunDashboardState(
+                            topicMastery = topicMastery(SPEEDRUN_TAG_PREFIX),
+                            gradedReviews = db.queryScalar("SELECT count() FROM revlog WHERE ease > 0"),
+                        )
+                    }
+                renderSpeedrunDashboard(state)
+            } catch (error: Exception) {
+                Timber.e(error, "Failed to load Speedrun topic evidence")
+                binding.speedrunEngineEvidence.text =
+                    getString(
+                        R.string.speedrun_engine_error,
+                        error.localizedMessage ?: error::class.simpleName.orEmpty(),
+                    )
+                updateSpeedrunTimestamp()
+            }
+        }
+    }
+
+    private fun renderSpeedrunDashboard(state: SpeedrunDashboardState) {
+        val evidence = state.topicMastery
+        binding.speedrunMemoryScore.text =
+            getString(R.string.speedrun_score_abstain_memory, state.gradedReviews)
+        binding.speedrunEngineEvidence.text =
+            if (evidence.totalTaggedCards == 0) {
+                getString(R.string.speedrun_engine_empty)
+            } else if (evidence.cardsWithMemoryState == 0) {
+                getString(
+                    R.string.speedrun_engine_evidence_no_memory_state,
+                    evidence.totalTaggedCards,
+                    evidence.topicsCount,
+                )
+            } else {
+                val weightedRecall =
+                    evidence.topicsList.sumOf {
+                        it.averageRecall.toDouble() * it.cardsWithMemoryState
+                    } / evidence.cardsWithMemoryState
+                getString(
+                    R.string.speedrun_engine_evidence,
+                    evidence.cardsWithMemoryState,
+                    evidence.totalTaggedCards,
+                    weightedRecall * 100,
+                    evidence.topicsCount,
+                )
+            }
+        updateSpeedrunTimestamp()
+    }
+
+    private fun updateSpeedrunTimestamp() {
+        val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(Date())
+        binding.speedrunLastUpdated.text = getString(R.string.speedrun_dashboard_updated, time)
     }
 
     /** Prepares and initiates a printing task for the content(stats) displayed in the WebView.
@@ -122,8 +183,14 @@ class Statistics : PageFragment(R.layout.page_statistics) {
     companion object {
         const val ARG_HIDE_BACK_BUTTON = "hideBackButton"
         private const val KEY_DECK_NAME = "key_deck_name"
+        private const val SPEEDRUN_TAG_PREFIX = "mcat"
     }
 }
+
+private data class SpeedrunDashboardState(
+    val topicMastery: anki.stats.TopicMasteryResponse,
+    val gradedReviews: Int,
+)
 
 private val PrintJob.isActive: Boolean
     get() = !isCompleted && !isFailed && !isCancelled

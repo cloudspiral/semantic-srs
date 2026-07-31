@@ -10,4 +10,16 @@
 
 <resources>
     <string name="open_statistics" comment="Description of the shortcut that opens the statistics page">Open statistics</string>
+    <string name="speedrun_dashboard_title">Speedrun · MCAT</string>
+    <string name="speedrun_dashboard_subtitle">One Rust engine · three separate claims · honest abstention</string>
+    <string name="speedrun_score_loading_memory"><b>Memory</b> · Checking FSRS evidence…</string>
+    <string name="speedrun_score_abstain_memory"><b>Memory</b> · No estimate or range · %1$d/200 graded reviews</string>
+    <string name="speedrun_score_abstain_performance"><b>Performance</b> · No estimate or range · needs held-back exam questions</string>
+    <string name="speedrun_score_abstain_readiness"><b>Readiness</b> · No MCAT estimate or range · requires 50% coverage and held-back performance</string>
+    <string name="speedrun_engine_loading">Rust engine · Loading topic evidence…</string>
+    <string name="speedrun_engine_empty">Rust engine · No cards tagged under mcat yet</string>
+    <string name="speedrun_engine_evidence_no_memory_state">Rust engine · %1$d tagged cards · no FSRS memory state yet · %2$d topic groups</string>
+    <string name="speedrun_engine_evidence">Rust engine · %1$d/%2$d tagged cards have FSRS state · average recall %3$.1f%% · %4$d topic groups</string>
+    <string name="speedrun_engine_error">Rust engine · Topic evidence unavailable: %1$s</string>
+    <string name="speedrun_dashboard_updated">Updated %1$s</string>
 </resources>

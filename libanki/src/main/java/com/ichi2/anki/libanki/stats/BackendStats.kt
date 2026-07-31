@@ -16,6 +16,7 @@
 
 package com.ichi2.anki.libanki.stats
 
+import anki.stats.TopicMasteryResponse
 import com.ichi2.anki.libanki.Collection
 
 // These take and return bytes that the frontend TypeScript code will encode/decode.
@@ -34,3 +35,11 @@ fun Collection.getGraphPreferencesRaw(): ByteArray {
 }
 
 fun Collection.setGraphPreferencesRaw(input: ByteArray): ByteArray = backend.setGraphPreferencesRaw(input)
+
+/**
+ * Returns the same read-only, FSRS-backed topic evidence used by the desktop Speedrun fork.
+ */
+fun Collection.topicMastery(
+    tagPrefix: String,
+    masteryThreshold: Float = 0.9f,
+): TopicMasteryResponse = backend.topicMastery(tagPrefix = tagPrefix, masteryThreshold = masteryThreshold)
