@@ -63,6 +63,16 @@ class BackendIntegrationTests : InstrumentedTest() {
     }
 
     @Test
+    fun topicMasteryRunsThroughAndroidRustBackend() {
+        val backend = getBackend("initial_version_2_12_1.anki2")
+
+        val response = backend.topicMastery(tagPrefix = "mcat", masteryThreshold = 0.9f)
+
+        Assert.assertEquals("mcat", response.tagPrefix)
+        Assert.assertEquals(0.9f, response.masteryThreshold, 0.0001f)
+    }
+
+    @Test
     fun columnNamesTest() {
         val backendV1 = getBackend("initial_version_2_12_1.anki2")
         val names = backendV1.getColumnNames("select * from col")

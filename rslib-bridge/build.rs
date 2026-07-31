@@ -14,6 +14,7 @@ use anyhow::Result;
 use prost_reflect::DescriptorPool;
 
 fn main() -> Result<()> {
+    println!("cargo:rerun-if-env-changed=PROTOC");
     let descriptors_path = env::var("DESCRIPTORS_BIN").ok().map(PathBuf::from).unwrap();
     println!("cargo:rerun-if-changed={}", descriptors_path.display());
     let pool = DescriptorPool::decode(std::fs::read(descriptors_path)?.as_ref())?;

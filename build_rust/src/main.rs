@@ -1,20 +1,39 @@
-use anki_io::{copy_file, create_dir_all};
-use anki_io::{create_file, read_file};
-use anki_process::CommandExt;
-use anyhow::Result;
-use camino::{Utf8Path, Utf8PathBuf};
 use std::collections::HashSet;
 use std::env;
 use std::env::consts::OS;
 use std::fs;
-use std::io::{self, Write};
+use std::io::Write;
+use std::io::{
+    self,
+};
 use std::path::Path;
 use std::process::Command;
+
+use anki_io::copy_file;
+use anki_io::create_dir_all;
+use anki_io::create_file;
+use anki_io::read_file;
+use anki_process::CommandExt;
+use anyhow::Result;
+use camino::Utf8Path;
+use camino::Utf8PathBuf;
 use streaming_iterator::StreamingIterator;
-use tree_sitter::{Parser, Query, QueryCursor};
+use tree_sitter::Parser;
+use tree_sitter::Query;
+use tree_sitter::QueryCursor;
 
 const ANDROID_OUT_DIR: &str = "rsdroid/build/generated/jniLibs";
 const ROBOLECTRIC_OUT_DIR: &str = "rsdroid-testing/build/generated/jniLibs";
+
+fn bundled_protoc() -> Utf8PathBuf {
+    let path = Utf8Path::new("anki/out/extracted/protoc/bin").join(if cfg!(windows) {
+        "protoc.exe"
+    } else {
+        "protoc"
+    });
+    Utf8PathBuf::from_path_buf(path.canonicalize().expect("bundled protoc should exist"))
+        .expect("bundled protoc path should be valid UTF-8")
+}
 
 fn main() -> Result<()> {
     if env::var("RUNNING_FROM_BUILD_SCRIPT").is_ok() {
@@ -180,6 +199,8 @@ fn build_android_jni() -> Result<()> {
         // build products go into separate folder so they don't trigger recompile
         // of robolectric/desktop code
         .env("CARGO_TARGET_DIR", "target")
+        // Keep generated Java/Kotlin compatible with the pinned protobuf runtime.
+        .env("PROTOC", bundled_protoc())
         .env("STRINGS_JSON", env!("STRINGS_JSON_ANKIDROID"))
         .arg("ndk")
         .arg("-o")
@@ -315,6 +336,7 @@ fn build_rsdroid(is_release: bool, target_arch: &str, target_dir: &Utf8Path) -> 
     command
         // Robolectric build cache can be shared with desktop, as it's the same arch
         .env("CARGO_TARGET_DIR", target_dir)
+        .env("PROTOC", bundled_protoc())
         .env("STRINGS_JSON", env!("STRINGS_JSON_ANKIDROID"))
         .args(["build", "-p", "rsdroid"]);
     if is_release {
