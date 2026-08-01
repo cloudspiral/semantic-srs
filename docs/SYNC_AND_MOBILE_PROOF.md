@@ -76,10 +76,20 @@ Android was then force-stopped and relaunched in the middle of an answer screen
 reported 21 cards, 22 unique events, the same conflict result, and a clean
 database.
 
+The desktop fork was separately driven through its real Qt webviews. On each of
+20 cycles the harness opened the deck, started the reviewer, confirmed the
+answer plus Again/Hard/Good/Easy controls were visible, and sent an
+unconditional process kill before grading. After the twentieth kill, the same
+strict collection verifier reported the original 21 cards and 22 review events
+with no duplicates or loss, the same conflict state, and a successful database
+integrity rebuild/check.
+
 Representative machine-generated JSON and screenshots are intentionally kept
 outside Git under `tmp/sync-proof/evidence/`. The final verifier outputs are
 `05-final-verification.json`, `06-repeat-sync.json`, and
-`08-post-crash-verification.json`.
+`08-post-crash-verification.json`. The desktop run adds
+`09-desktop-crash-cycles.jsonl` with one pre-kill UI-state record per cycle and
+`10-desktop-post-crash-verification.json` with the final integrity result.
 
 ## Re-running the collection verifier
 

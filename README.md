@@ -9,7 +9,7 @@ Current verified state:
 - 3 Rust tests and 1 Python call-through test cover grouping, missing memory evidence, threshold behavior, and undo neutrality;
 - optimized desktop and on-device Android 50,000-card benchmarks both meet the interactive dashboard budget;
 - the desktop Statistics page and AnkiDroid Statistics drawer show the same Rust-backed evidence while memory, performance, and readiness abstain independently;
-- a real two-client offline sync retained 22 unique review events across 21 cards, including two conflicting reviews of one card, and stayed idempotent after repeat sync and 20 Android force-stop/relaunch cycles;
+- a real two-client offline sync retained 22 unique review events across 21 cards, including two conflicting reviews of one card, and stayed idempotent after repeat sync and 20 mid-answer force-close/relaunch cycles on each app;
 - an Apple Silicon DMG and Android debug APK build successfully without replacing the user's installed Anki or normal profile; and
 - readiness remains abstained because no held-back outcome dataset supports a score estimate yet.
 
