@@ -19,6 +19,7 @@ from aqt.mediasrv import (
     _legacy_editor_content_security_policy,
     ensure_safe_path,
     is_localhost_origin,
+    post_handlers,
 )
 
 
@@ -100,6 +101,10 @@ class TestIsLocalhostOrigin:
     )
     def test_rejected_origins(self, origin: str) -> None:
         assert is_localhost_origin(origin) is False
+
+
+def test_topic_mastery_backend_is_available_to_svelte_pages() -> None:
+    assert "topicMastery" in post_handlers
 
 
 def _make_media_file(tmpdir: str, filename: str, content: bytes = b"test") -> str:

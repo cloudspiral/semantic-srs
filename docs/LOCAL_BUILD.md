@@ -41,7 +41,7 @@ distribution to other Macs. A distributable artifact still requires an Apple
 Developer ID certificate and notarization.
 
 The 2026-07-31 artifact is 213 MiB with SHA-256
-`cebdc95f123d92e2cac1dafcaecd32924d833ace8fe983573525685686db124f`.
+`8d757377d5c8f4cf496831dcec5402a19b75f57528c662e57d4dff2470f8654f`.
 
 ## Test and benchmark
 

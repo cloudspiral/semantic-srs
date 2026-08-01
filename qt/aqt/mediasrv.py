@@ -1110,6 +1110,7 @@ exposed_backend_list = [
     "card_stats",
     "get_review_logs",
     "graphs",
+    "topic_mastery",
     "get_graph_preferences",
     "set_graph_preferences",
     # TagsService
