@@ -64,7 +64,7 @@
         "vitest": "^3"
     },
     "dependencies": {
-        "@bufbuild/protobuf": "^1.2.1",
+        "@bufbuild/protobuf": "^2.13.0",
         "@floating-ui/dom": "^1.7.6",
         "@fluent/bundle": "^0.19.1",
         "@mdi/svg": "^7.0.96",
