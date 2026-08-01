@@ -16,11 +16,13 @@ License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
     import RangeBox from "./RangeBox.svelte";
     import RetrievabilityGraph from "./RetrievabilityGraph.svelte";
     import ReviewsGraph from "./ReviewsGraph.svelte";
+    import SpeedrunDashboard from "./SpeedrunDashboard.svelte";
     import StabilityGraph from "./StabilityGraph.svelte";
     import TodayStats from "./TodayStats.svelte";
     import TrueRetention from "./TrueRetention.svelte";
 
     const graphs = [
+        SpeedrunDashboard,
         TodayStats,
         FutureDue,
         CalendarGraph,

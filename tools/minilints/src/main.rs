@@ -29,6 +29,7 @@ const NONSTANDARD_HEADER: &[&str] = &[
 
 const IGNORED_FOLDERS: &[&str] = &[
     "./out",
+    "./tmp",
     "./node_modules",
     "./qt/aqt/forms",
     "./tools/workspace-hack",

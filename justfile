@@ -30,6 +30,10 @@ rebuild-web:
 wheels:
     {{ ninja }} wheels
 
+# Build the native installer for the current platform
+installer:
+    {{ if os() == "windows" { "$env:RELEASE='2'; tools\\ninja installer" } else { "RELEASE=2 ./ninja installer" } }}
+
 # Build and run all checks (lint + test) - lets ninja handle dependencies
 check:
     {{ ninja }} pylib qt check

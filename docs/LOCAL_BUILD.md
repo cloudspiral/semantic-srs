@@ -28,6 +28,21 @@ For a production-performance build:
 RELEASE=1 just build
 ```
 
+## Build a macOS installer
+
+```sh
+just installer
+```
+
+The verified Apple Silicon build produced
+`out/installer/dist/anki-26.05-mac-apple.dmg`. The app in that image is
+ad-hoc signed, so it is suitable for local proof on the build Mac but not for
+distribution to other Macs. A distributable artifact still requires an Apple
+Developer ID certificate and notarization.
+
+The 2026-07-31 artifact is 213 MiB with SHA-256
+`cebdc95f123d92e2cac1dafcaecd32924d833ace8fe983573525685686db124f`.
+
 ## Test and benchmark
 
 ```sh
@@ -44,4 +59,12 @@ PYTHONPATH="$PWD/out/pylib" \
 
 ## Known boundary
 
-This proves the desktop fork builds and runs locally. It does not prove a clean-machine installer, phone build, or bidirectional phone sync. Those remain separate acceptance tests.
+This proves the desktop fork builds and runs locally. The generated DMG passed
+image verification, deep code-signature verification, and a launch directly
+from a read-only mounted image with `--base` pointing at a disposable path. It
+does not prove installation or launch on a separate clean Mac, and the ad-hoc
+signature is intentionally not distributable.
+
+The Android emulator and bidirectional offline-sync proof are documented in
+[SYNC_AND_MOBILE_PROOF.md](./SYNC_AND_MOBILE_PROOF.md). None of these commands
+replace `/Applications/Anki.app` or open the normal Anki profile.

@@ -7,10 +7,13 @@ Current verified state:
 - the upstream Anki desktop app builds and runs on macOS;
 - a read-only Rust/protobuf/Python topic-mastery query reports FSRS recall by `mcat::...` tag without changing scheduling state;
 - 3 Rust tests and 1 Python call-through test cover grouping, missing memory evidence, threshold behavior, and undo neutrality;
-- an optimized 50,000-card benchmark is rerunnable with `tools/benchmark_topic_mastery.py`;
-- readiness is intentionally not implemented or displayed yet because no held-back outcome dataset supports it.
+- optimized desktop and on-device Android 50,000-card benchmarks both meet the interactive dashboard budget;
+- the desktop Statistics page and AnkiDroid Statistics drawer show the same Rust-backed evidence while memory, performance, and readiness abstain independently;
+- a real two-client offline sync retained 22 unique review events across 21 cards, including two conflicting reviews of one card, and stayed idempotent after repeat sync and 20 Android force-stop/relaunch cycles;
+- an Apple Silicon DMG and Android debug APK build successfully without replacing the user's installed Anki or normal profile; and
+- readiness remains abstained because no held-back outcome dataset supports a score estimate yet.
 
-See the [Brainlift](./docs/BRAINLIFT.md), [local build guide](./docs/LOCAL_BUILD.md), and [Rust implementation note](./docs/RUST_TOPIC_MASTERY.md).
+See the [Brainlift](./docs/BRAINLIFT.md), [local build guide](./docs/LOCAL_BUILD.md), [sync and mobile proof](./docs/SYNC_AND_MOBILE_PROOF.md), and [Rust implementation note](./docs/RUST_TOPIC_MASTERY.md).
 
 ## Anki upstream
 

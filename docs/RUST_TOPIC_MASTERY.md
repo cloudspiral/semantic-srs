@@ -39,6 +39,18 @@ PYTHONPATH="$PWD/out/pylib" \
   tools/benchmark_topic_mastery.py --cards 50000 --iterations 20
 ```
 
+The same RPC was also benchmarked across AnkiDroid's real JNI boundary on an
+Android 15 ARM64 Pixel 8 emulator. After three warmups, 20 measured calls over
+50,000 tagged cards produced:
+
+- median: 69.393 ms;
+- p95: 91.849 ms; and
+- worst case: 95.509 ms.
+
+The Android instrumentation test has a hard `p95 < 100 ms` assertion. It lives
+in the companion backend checkout at
+`tmp/Anki-Android-Backend/rsdroid-instrumented/src/androidTest/java/net/ankiweb/rsdroid/BackendIntegrationTests.kt`.
+
 ## Tests and invariants
 
 The three Rust unit tests prove:
@@ -48,6 +60,10 @@ The three Rust unit tests prove:
 3. changing the threshold changes mastery while the card and undo status remain byte-for-byte/equality unchanged, followed by a clean collection database check.
 
 The Python test creates an `mcat::biology` note and calls `Collection.topic_mastery()`, exercising generated protobuf bindings and the Rust bridge end to end.
+
+An Android integration test creates a real tagged note and calls the same RPC
+through `BackendFactory`, proving the generated Kotlin/protobuf/JNI path rather
+than a Kotlin reimplementation.
 
 ## Upstream files touched
 
